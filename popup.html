@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      /* 竖版 16:10：宽度 375、最小高度 600（高度=16 那条边，尽量贴近显示器高度的平台上限） */
+      width: 375px;
+      min-height: 600px;
+      margin: 0;
+      padding: 14px;
+      font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 20px;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+    h1 { font-size: 22px; margin: 0 0 10px; }
+    label { display: block; margin: 10px 0 6px; opacity: 0.8; }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      min-height: 130px;
+      resize: vertical;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #8884;
+      background: #8881;
+      color: inherit;
+      font-family: "PingFang SC", "Microsoft YaHei", monospace;
+      font-size: 20px;
+      line-height: 1.5;
+    }
+    .row { display: flex; gap: 8px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+    button {
+      flex: 0 0 auto;
+      padding: 9px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #2f6df6;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: default; }
+    button.ghost { background: #8883; color: inherit; }
+    .hint { flex: 1; opacity: 0.65; font-size: 14px; min-width: 120px; }
+    .loss { color: #e0533d; font-size: 14px; margin-top: 8px; min-height: 18px; }
+    #out { background: #2f6df615; min-height: 260px; }
+  </style>
+</head>
+<body>
+  <h1>乱码还原</h1>
+  <label for="inp">乱码（在网页选中后自动填入，也可手动粘贴）</label>
+  <textarea id="inp" placeholder="把銆銆… / 濡傛灉… 这类乱码粘到这里，或先在网页上选中它"></textarea>
+  <div class="row">
+    <button id="decode">解码</button>
+    <button id="copy" class="ghost" disabled>复制结果</button>
+    <span class="hint">点一下开始解码</span>
+  </div>
+  <div class="row">
+    <button id="cover">在页面覆盖显示</button>
+    <span class="hint">选中网页文字后点此，直接在原文上盖框（适合禁右键的页面）</span>
+  </div>
+  <div class="row">
+    <button id="pick">点选网页区块解码</button>
+    <span class="hint">点此后在页面点任意区块，自动解码整块文字（无需选中、绕开禁右键）</span>
+  </div>
+  <div class="row">
+    <button id="page">整页解码</button>
+    <span class="hint">点此后把整个网页的所有文字一次性还原，居中大窗口显示</span>
+  </div>
+  <div class="loss" id="loss"></div>
+  <label for="out">还原结果</label>
+  <textarea id="out" readonly placeholder="解码后的正常文字会显示在这里"></textarea>
+
+  <script src="gbk_table.js"></script>
+  <script src="decoder.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

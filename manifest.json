@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "乱码还原 (GBK Mojibake Recover)",
+  "version": "1.0.0",
+  "description": "手动点击解码 UTF-8 被错译成 GBK 的乱码（銆銆… / 濡傛灉… 这类）。不自动运行：在网页选中乱码后右键「解码选中乱码」，结果直接浮在页面上显示。",
+  "action": {
+    "default_title": "乱码还原",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "contextMenus"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
